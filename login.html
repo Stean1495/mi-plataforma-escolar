@@ -4,117 +4,118 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Juegos en Clase - Iniciar Sesión</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Orbitron', sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+      background: #0f0c29;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      overflow: hidden;
       position: relative;
+      overflow: hidden;
+      color: #fff;
     }
 
-    /* Decoración de fondo: libros, lápices, globos */
+    /* Patrón de fondo pixelado (simulado con pseudo-elementos) */
     body::before {
-      content: "📚 📖 ✏️ 🌍 🧪 🧮";
+      content: "";
       position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 24px;
-      opacity: 0.3;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1px),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 20px 20px, 40px 40px;
       z-index: 0;
-      transform: rotate(-15deg);
-    }
-    body::after {
-      content: "🎒 🔬 📐 📝 🎮";
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      font-size: 22px;
-      opacity: 0.3;
-      z-index: 0;
-      transform: rotate(12deg);
     }
 
     .login-container {
-      display: flex;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+      background: rgba(10, 10, 30, 0.85);
+      border: 2px solid #00f7ff;
+      border-radius: 20px;
+      box-shadow: 
+        0 0 20px rgba(0, 247, 255, 0.5),
+        inset 0 0 10px rgba(0, 247, 255, 0.2);
       width: 100%;
       max-width: 800px;
+      display: flex;
       overflow: hidden;
       position: relative;
       z-index: 1;
     }
 
-    /* Lado del avatar */
+    /* Decoración de controles de juego */
+    .decoration {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0.6;
+      z-index: 1;
+    }
+    .decoration.top-left { top: 20px; left: 20px; }
+    .decoration.top-right { top: 20px; right: 20px; }
+    .decoration.bottom-left { bottom: 20px; left: 20px; }
+    .decoration.bottom-right { bottom: 20px; right: 20px; }
+
     .avatar-section {
       flex: 1;
-      background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
+      background: rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 30px;
-      color: white;
       text-align: center;
+      border-right: 1px solid rgba(0, 247, 255, 0.3);
     }
 
     .avatar-frame {
-      width: 180px;
-      height: 180px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
+      width: 160px;
+      height: 160px;
+      background: rgba(0, 20, 40, 0.7);
+      border: 3px solid #ff00c8;
+      border-radius: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
-      backdrop-filter: blur(4px);
-      border: 3px solid rgba(255, 255, 255, 0.4);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      margin: 20px 0;
+      box-shadow: 0 0 15px rgba(255, 0, 200, 0.5);
+      transition: all 0.4s ease;
     }
 
     .avatar-frame:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+      transform: scale(1.08) rotate(3deg);
+      box-shadow: 0 0 25px rgba(255, 0, 200, 0.8);
+      border-color: #ff00ff;
     }
 
-    /* Avatar estilo Sims (simplificado con emoji + estilo) */
     .avatar {
-      font-size: 80px;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .avatar-frame:hover .avatar {
-      transform: rotate(5deg) scale(1.1);
+      font-size: 70px;
+      text-shadow: 0 0 10px #00f7ff;
     }
 
     .avatar-section h3 {
-      font-size: 22px;
-      margin-top: 10px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      font-size: 20px;
+      margin: 10px 0;
+      color: #00f7ff;
+      text-shadow: 0 0 8px rgba(0, 247, 255, 0.7);
     }
 
-    .avatar-section p {
-      font-size: 14px;
-      opacity: 0.9;
-      margin-top: 8px;
-      max-width: 200px;
+    .game-elements {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+      font-size: 20px;
     }
 
-    /* Formulario */
     .form-section {
       flex: 1;
       padding: 40px;
@@ -123,129 +124,149 @@
     }
 
     .form-section h2 {
-      color: #182848;
+      color: #00f7ff;
       margin-bottom: 24px;
-      font-size: 26px;
+      font-size: 24px;
       text-align: center;
+      text-shadow: 0 0 10px rgba(0, 247, 255, 0.8);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 18px;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .form-group label {
       display: block;
       margin-bottom: 8px;
-      font-weight: 600;
-      color: #2c3e50;
+      color: #ff00c8;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .form-group input {
       width: 100%;
       padding: 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
+      border: 2px solid #555;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
       font-size: 16px;
       transition: all 0.3s ease;
     }
 
     .form-group input:focus {
-      border-color: #3498db;
-      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
       outline: none;
+      border-color: #00f7ff;
+      box-shadow: 0 0 0 3px rgba(0, 247, 255, 0.3);
     }
 
     .form-group input:hover {
-      border-color: #3498db;
-      transform: translateY(-1px);
+      border-color: #ff00c8;
     }
 
     .btn {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(120deg, #3498db, #2980b9);
-      color: white;
+      background: linear-gradient(120deg, #ff00c8, #00f7ff);
+      color: black;
+      font-weight: bold;
       border: none;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: 700;
+      border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
-      transition: all 0.35s ease;
-      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.6);
-      background: linear-gradient(120deg, #2980b9, #1c6ea4);
-    }
-
-    .btn:active {
-      transform: translateY(0);
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 0, 200, 0.7);
     }
 
     .link {
       display: block;
       text-align: center;
       margin-top: 20px;
-      color: #3498db;
+      color: #00f7ff;
       text-decoration: none;
-      font-weight: 600;
-      padding: 8px;
-      border-radius: 8px;
+      font-size: 14px;
       transition: all 0.25s ease;
     }
 
     .link:hover {
-      background: rgba(52, 152, 219, 0.1);
-      transform: scale(1.03);
-      text-decoration: none;
+      text-shadow: 0 0 10px rgba(0, 247, 255, 1);
+      transform: scale(1.05);
     }
 
-    /* Responsive: en móviles, apilar verticalmente */
+    /* Responsive */
     @media (max-width: 768px) {
       .login-container {
         flex-direction: column;
         max-width: 450px;
       }
       .avatar-section {
-        padding: 20px;
-      }
-      .form-section {
-        padding: 30px;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 247, 255, 0.3);
       }
     }
   </style>
 </head>
 <body>
+  <!-- Decoración tipo arcade -->
+  <div class="decoration top-left">🎮</div>
+  <div class="decoration top-right">🕹️</div>
+  <div class="decoration bottom-left">❤️❤️❤️</div>
+  <div class="decoration bottom-right">A B</div>
+
   <div class="login-container">
-    <!-- Sección del avatar (estilo Sims + escolar) -->
+    <!-- Avatar estilo juego -->
     <div class="avatar-section">
       <div class="avatar-frame">
-        <div class="avatar">👩‍🎓</div>
+        <div class="avatar">🧑‍🎓</div>
       </div>
-      <h3>Tu Aventura Escolar</h3>
-      <p>Gana puntos, mejora tu avatar y ¡desbloquea recompensas!</p>
+      <h3>JUEGOS EN CLASE</h3>
+      <p>Gana XP, mejora tu avatar y desbloquea recompensas</p>
+      <div class="game-elements">
+        <span>🏆</span>
+        <span>🎒</span>
+        <span>⚡</span>
+        <span>📚</span>
+      </div>
     </div>
 
-    <!-- Formulario de login -->
+    <!-- Formulario con usuario y contraseña -->
     <div class="form-section">
-      <h2>🔐 Iniciar Sesión</h2>
+      <h2>INICIAR SESIÓN</h2>
       <form id="loginForm">
         <div class="form-group">
-          <label for="documento">Número de Documento</label>
+          <label for="usuario">Usuario (Nombre Apellido)</label>
           <input 
             type="text" 
-            id="documento" 
-            name="documento" 
+            id="usuario" 
+            name="usuario" 
+            required 
+            placeholder="Ej: Juan Pérez"
+          >
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña (Documento)</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
             required 
             inputmode="numeric"
             placeholder="Ej: 12345678"
           >
         </div>
-        <button type="submit" class="btn">Entrar a mi Aventura</button>
+        <button type="submit" class="btn">JUGAR</button>
       </form>
-      <a href="registro.html" class="link">¿Eres nuevo? Regístrate aquí</a>
+      <a href="registro.html" class="link">¿Nuevo? Crea tu personaje</a>
     </div>
   </div>
 
@@ -253,21 +274,20 @@
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      const doc = document.getElementById('documento').value.trim();
+      const usuario = document.getElementById('usuario').value.trim();
+      const pass = document.getElementById('password').value.trim();
       
-      if (!doc || isNaN(doc)) {
-        alert('❗ Por favor ingresa un número de documento válido.');
+      if (!usuario || !pass || isNaN(pass)) {
+        alert('❗ Usuario: Nombre y Apellido\n❗ Contraseña: Número de documento válido');
         return;
       }
 
-      alert('🎮 ¡Bienvenido! Tu aventura escolar comienza ahora.');
+      alert(`🎮 ¡Bienvenido, ${usuario}!\nTu aventura escolar comienza ahora.`);
       // window.location.href = 'perfil.html';
     });
-
-    // Efecto sutil al cargar
-    document.body.style.opacity = "0";
-    document.body.style.transition = "opacity 1s ease";
-    setTimeout(() => {
+  </script>
+</body>
+</html>
       document.body.style.opacity = "1";
     }, 100);
   </script>
