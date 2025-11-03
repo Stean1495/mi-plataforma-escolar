@@ -3,101 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Iniciar Sesión - Plataforma Escolar</title>
+  <title>Juegos en Clase - Iniciar Sesión</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
+
     body {
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
+      overflow: hidden;
+      position: relative;
     }
+
+    /* Decoración de fondo: libros, lápices, globos */
+    body::before {
+      content: "📚 📖 ✏️ 🌍 🧪 🧮";
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      opacity: 0.3;
+      z-index: 0;
+      transform: rotate(-15deg);
+    }
+    body::after {
+      content: "🎒 🔬 📐 📝 🎮";
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 22px;
+      opacity: 0.3;
+      z-index: 0;
+      transform: rotate(12deg);
+    }
+
     .login-container {
+      display: flex;
       background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border-radius: 24px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
       width: 100%;
-      max-width: 400px;
+      max-width: 800px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
     }
-    .login-container h2 {
+
+    /* Lado del avatar */
+    .avatar-section {
+      flex: 1;
+      background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      color: white;
       text-align: center;
+    }
+
+    .avatar-frame {
+      width: 180px;
+      height: 180px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-bottom: 20px;
-      color: #2c3e50;
+      backdrop-filter: blur(4px);
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
+
+    .avatar-frame:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Avatar estilo Sims (simplificado con emoji + estilo) */
+    .avatar {
+      font-size: 80px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .avatar-frame:hover .avatar {
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    .avatar-section h3 {
+      font-size: 22px;
+      margin-top: 10px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .avatar-section p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 8px;
+      max-width: 200px;
+    }
+
+    /* Formulario */
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-section h2 {
+      color: #182848;
+      margin-bottom: 24px;
+      font-size: 26px;
+      text-align: center;
+    }
+
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
+
     .form-group label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       font-weight: 600;
-      color: #34495e;
+      color: #2c3e50;
     }
+
     .form-group input {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      padding: 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
       font-size: 16px;
+      transition: all 0.3s ease;
     }
+
     .form-group input:focus {
       border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
       outline: none;
-      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
     }
+
+    .form-group input:hover {
+      border-color: #3498db;
+      transform: translateY(-1px);
+    }
+
     .btn {
       width: 100%;
-      padding: 12px;
-      background: #3498db;
+      padding: 14px;
+      background: linear-gradient(120deg, #3498db, #2980b9);
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.35s ease;
+      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
     }
+
     .btn:hover {
-      background: #2980b9;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.6);
+      background: linear-gradient(120deg, #2980b9, #1c6ea4);
     }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
     .link {
       display: block;
       text-align: center;
-      margin-top: 16px;
+      margin-top: 20px;
       color: #3498db;
       text-decoration: none;
+      font-weight: 600;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
     }
+
     .link:hover {
-      text-decoration: underline;
+      background: rgba(52, 152, 219, 0.1);
+      transform: scale(1.03);
+      text-decoration: none;
+    }
+
+    /* Responsive: en móviles, apilar verticalmente */
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column;
+        max-width: 450px;
+      }
+      .avatar-section {
+        padding: 20px;
+      }
+      .form-section {
+        padding: 30px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="login-container">
-    <h2>🔐 Iniciar Sesión</h2>
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="documento">Número de Documento</label>
-        <input 
-          type="text" 
-          id="documento" 
-          name="documento" 
-          required 
-          inputmode="numeric"
-          placeholder="Ej: 12345678"
-        >
+    <!-- Sección del avatar (estilo Sims + escolar) -->
+    <div class="avatar-section">
+      <div class="avatar-frame">
+        <div class="avatar">👩‍🎓</div>
       </div>
-      <button type="submit" class="btn">Entrar a mi Aventura</button>
-    </form>
-    <a href="registro.html" class="link">¿Eres nuevo? Regístrate aquí</a>
+      <h3>Tu Aventura Escolar</h3>
+      <p>Gana puntos, mejora tu avatar y ¡desbloquea recompensas!</p>
+    </div>
+
+    <!-- Formulario de login -->
+    <div class="form-section">
+      <h2>🔐 Iniciar Sesión</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="documento">Número de Documento</label>
+          <input 
+            type="text" 
+            id="documento" 
+            name="documento" 
+            required 
+            inputmode="numeric"
+            placeholder="Ej: 12345678"
+          >
+        </div>
+        <button type="submit" class="btn">Entrar a mi Aventura</button>
+      </form>
+      <a href="registro.html" class="link">¿Eres nuevo? Regístrate aquí</a>
+    </div>
   </div>
 
   <script>
@@ -107,14 +256,20 @@
       const doc = document.getElementById('documento').value.trim();
       
       if (!doc || isNaN(doc)) {
-        alert('Por favor ingresa un número de documento válido.');
+        alert('❗ Por favor ingresa un número de documento válido.');
         return;
       }
 
-      // Por ahora, solo redirige (más adelante se validará con Firebase)
-      alert('¡Bienvenido! Pronto se verificará tu cuenta.');
-      // window.location.href = 'perfil.html'; // descomenta cuando exista perfil.html
+      alert('🎮 ¡Bienvenido! Tu aventura escolar comienza ahora.');
+      // window.location.href = 'perfil.html';
     });
+
+    // Efecto sutil al cargar
+    document.body.style.opacity = "0";
+    document.body.style.transition = "opacity 1s ease";
+    setTimeout(() => {
+      document.body.style.opacity = "1";
+    }, 100);
   </script>
 </body>
 </html>
