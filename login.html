@@ -4,18 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Juegos en Clase - Iniciar Sesión</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Press+Start+2P&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Quicksand', sans-serif;
     }
 
     body {
-      background: #0f0c29;
-      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 30%, #4a148c 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -23,28 +22,38 @@
       padding: 20px;
       position: relative;
       overflow: hidden;
-      color: #fff;
+      color: #2c3e50;
     }
 
-    /* Patrón de fondo pixelado (simulado con pseudo-elementos) */
+    /* Ligeras decoraciones de fondo (suaves) */
     body::before {
-      content: "";
+      content: "🎮 🕹️ 📚 ⚡";
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1px),
-        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 20px 20px, 40px 40px;
+      top: 30px;
+      left: 30px;
+      font-size: 20px;
+      opacity: 0.15;
       z-index: 0;
+      transform: rotate(-10deg);
+    }
+    body::after {
+      content: "🏆 🎒 ❤️ A B";
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      font-size: 18px;
+      opacity: 0.15;
+      z-index: 0;
+      transform: rotate(8deg);
     }
 
     .login-container {
-      background: rgba(10, 10, 30, 0.85);
-      border: 2px solid #00f7ff;
+      background: white;
+      border: 2px solid #4a148c;
       border-radius: 20px;
       box-shadow: 
-        0 0 20px rgba(0, 247, 255, 0.5),
-        inset 0 0 10px rgba(0, 247, 255, 0.2);
+        0 10px 30px rgba(74, 20, 140, 0.3),
+        0 0 0 4px rgba(171, 71, 188, 0.2);
       width: 100%;
       max-width: 800px;
       display: flex;
@@ -53,67 +62,61 @@
       z-index: 1;
     }
 
-    /* Decoración de controles de juego */
-    .decoration {
-      position: absolute;
-      font-size: 24px;
-      opacity: 0.6;
-      z-index: 1;
-    }
-    .decoration.top-left { top: 20px; left: 20px; }
-    .decoration.top-right { top: 20px; right: 20px; }
-    .decoration.bottom-left { bottom: 20px; left: 20px; }
-    .decoration.bottom-right { bottom: 20px; right: 20px; }
-
     .avatar-section {
       flex: 1;
-      background: rgba(0, 0, 0, 0.4);
+      background: linear-gradient(120deg, #e3f2fd, #bbdefb);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 30px;
       text-align: center;
-      border-right: 1px solid rgba(0, 247, 255, 0.3);
+      border-right: 2px dashed #90caf9;
     }
 
     .avatar-frame {
       width: 160px;
       height: 160px;
-      background: rgba(0, 20, 40, 0.7);
-      border: 3px solid #ff00c8;
-      border-radius: 12px;
+      background: white;
+      border: 4px solid #4a148c;
+      border-radius: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 20px 0;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
       transition: all 0.4s ease;
     }
 
     .avatar-frame:hover {
-      transform: scale(1.08) rotate(3deg);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.8);
-      border-color: #ff00ff;
+      transform: scale(1.08) rotate(2deg);
+      box-shadow: 0 0 20px rgba(74, 20, 140, 0.4);
+      border-color: #7b1fa2;
     }
 
     .avatar {
       font-size: 70px;
-      text-shadow: 0 0 10px #00f7ff;
+      color: #4a148c;
     }
 
     .avatar-section h3 {
-      font-size: 20px;
-      margin: 10px 0;
-      color: #00f7ff;
-      text-shadow: 0 0 8px rgba(0, 247, 255, 0.7);
+      font-size: 22px;
+      margin: 12px 0;
+      color: #4a148c;
+      font-weight: 700;
+    }
+
+    .avatar-section p {
+      color: #1a237e;
+      font-size: 14px;
+      max-width: 220px;
     }
 
     .game-elements {
       display: flex;
       gap: 12px;
       margin-top: 15px;
-      font-size: 20px;
+      font-size: 22px;
     }
 
     .form-section {
@@ -124,13 +127,13 @@
     }
 
     .form-section h2 {
-      color: #00f7ff;
+      color: #4a148c;
       margin-bottom: 24px;
-      font-size: 24px;
+      font-size: 22px;
       text-align: center;
-      text-shadow: 0 0 10px rgba(0, 247, 255, 0.8);
-      font-family: 'Press Start 2P', cursive;
-      font-size: 18px;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .form-group {
@@ -140,101 +143,102 @@
     .form-group label {
       display: block;
       margin-bottom: 8px;
-      color: #ff00c8;
+      color: #7b1fa2;
+      font-weight: 600;
       font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
     .form-group input {
       width: 100%;
       padding: 14px;
-      border: 2px solid #555;
-      border-radius: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
+      border: 2px solid #b39ddb;
+      border-radius: 10px;
+      background: #f5f9ff;
+      color: #283593;
       font-size: 16px;
       transition: all 0.3s ease;
     }
 
     .form-group input:focus {
       outline: none;
-      border-color: #00f7ff;
-      box-shadow: 0 0 0 3px rgba(0, 247, 255, 0.3);
+      border-color: #4a148c;
+      box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
     }
 
     .form-group input:hover {
-      border-color: #ff00c8;
+      border-color: #7e57c2;
     }
 
     .btn {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(120deg, #ff00c8, #00f7ff);
-      color: black;
+      background: linear-gradient(120deg, #7b1fa2, #4a148c);
+      color: white;
       font-weight: bold;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 10px;
+      font-size: 17px;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-family: 'Orbitron', sans-serif;
     }
 
     .btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(255, 0, 200, 0.7);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(123, 31, 162, 0.4);
+      background: linear-gradient(120deg, #6a1b9a, #3d0f72);
     }
 
     .link {
       display: block;
       text-align: center;
       margin-top: 20px;
-      color: #00f7ff;
+      color: #7b1fa2;
       text-decoration: none;
-      font-size: 14px;
+      font-weight: 600;
       transition: all 0.25s ease;
     }
 
     .link:hover {
-      text-shadow: 0 0 10px rgba(0, 247, 255, 1);
-      transform: scale(1.05);
+      color: #4a148c;
+      text-shadow: 0 0 5px rgba(123, 31, 162, 0.3);
+      transform: scale(1.03);
     }
 
     /* Responsive */
     @media (max-width: 768px) {
       .login-container {
         flex-direction: column;
-        max-width: 450px;
+        max-width: 480px;
       }
       .avatar-section {
         border-right: none;
-        border-bottom: 1px solid rgba(0, 247, 255, 0.3);
+        border-bottom: 2px dashed #90caf9;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Decoración tipo arcade -->
-  <div class="decoration top-left">🎮</div>
-  <div class="decoration top-right">🕹️</div>
-  <div class="decoration bottom-left">❤️❤️❤️</div>
-  <div class="decoration bottom-right">A B</div>
-
   <div class="login-container">
-    <!-- Avatar estilo juego -->
+    <!-- Avatar estilo juego (ahora en fondo claro) -->
     <div class="avatar-section">
       <div class="avatar-frame">
         <div class="avatar">🧑‍🎓</div>
       </div>
       <h3>JUEGOS EN CLASE</h3>
       <p>Gana XP, mejora tu avatar y desbloquea recompensas</p>
-   
+      <div class="game-elements">
+        <span>🏆</span>
+        <span>🎒</span>
+        <span>⚡</span>
+        <span>📚</span>
+      </div>
     </div>
 
-    <!-- Formulario con usuario y contraseña -->
+    <!-- Formulario -->
     <div class="form-section">
       <h2>INICIAR SESIÓN</h2>
       <form id="loginForm">
@@ -245,20 +249,20 @@
             id="usuario" 
             name="usuario" 
             required 
-            placeholder="Ej: Juan Pérez"
+            placeholder="Ej: Ana Gómez"
           >
         </div>
         <div class="form-group">
           <label for="password">Contraseña (Documento)</label>
-       <input 
-  type="text" 
-  id="password" 
-  name="password" 
-  required 
-  inputmode="numeric"
-  pattern="[0-9]*"
-  placeholder="Ej: 12345678"
->
+          <input 
+            type="text" 
+            id="password" 
+            name="password" 
+            required 
+            inputmode="numeric"
+            pattern="[0-9]*"
+            placeholder="Ej: 12345678"
+          >
         </div>
         <button type="submit" class="btn">JUGAR</button>
       </form>
@@ -267,25 +271,30 @@
   </div>
 
   <script>
+    // Bloquear letras en el campo de documento
+    document.getElementById('password').addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    // Validación al enviar
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
       const usuario = document.getElementById('usuario').value.trim();
       const pass = document.getElementById('password').value.trim();
       
-      if (!usuario || !pass || isNaN(pass)) {
-        alert('❗ Usuario: Nombre y Apellido\n❗ Contraseña: Número de documento válido');
+      if (!usuario) {
+        alert('❗ Por favor ingresa tu nombre y apellido.');
+        return;
+      }
+      if (!pass || isNaN(pass)) {
+        alert('❗ La contraseña debe ser un número de documento válido.');
         return;
       }
 
       alert(`🎮 ¡Bienvenido, ${usuario}!\nTu aventura escolar comienza ahora.`);
       // window.location.href = 'perfil.html';
     });
-  </script>
-</body>
-</html>
-      document.body.style.opacity = "1";
-    }, 100);
   </script>
 </body>
 </html>
