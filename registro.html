@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juegos en Clase - Registro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Press+Start+2P&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 30%, #4a148c 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      color: #2c3e50;
+    }
+
+    body::before {
+      content: "🎮 📚 ⚡ 🎒";
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      font-size: 20px;
+      opacity: 0.15;
+      z-index: 0;
+      transform: rotate(-8deg);
+    }
+    body::after {
+      content: "🏆 🕹️ A B ❤️";
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      font-size: 18px;
+      opacity: 0.15;
+      z-index: 0;
+      transform: rotate(10deg);
+    }
+
+    .register-container {
+      background: white;
+      border: 2px solid #4a148c;
+      border-radius: 20px;
+      box-shadow: 
+        0 10px 30px rgba(74, 20, 140, 0.3),
+        0 0 0 4px rgba(171, 71, 188, 0.2);
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .preview-section {
+      flex: 1;
+      background: linear-gradient(120deg, #e3f2fd, #bbdefb);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      text-align: center;
+      border-right: 2px dashed #90caf9;
+    }
+
+    .preview-frame {
+      width: 180px;
+      height: 180px;
+      background: white;
+      border: 4px solid #4a148c;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .preview-avatar {
+      font-size: 80px;
+      transition: all 0.3s ease;
+    }
+
+    .preview-section h3 {
+      font-size: 22px;
+      margin: 12px 0;
+      color: #4a148c;
+      font-weight: 700;
+    }
+
+    .preview-section p {
+      color: #1a237e;
+      font-size: 14px;
+      max-width: 240px;
+    }
+
+    .avatars-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+      max-width: 260px;
+    }
+
+    .avatar-option {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: 2px solid #b39ddb;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .avatar-option:hover {
+      transform: scale(1.15);
+      border-color: #7b1fa2;
+      box-shadow: 0 4px 8px rgba(123, 31, 162, 0.3);
+    }
+
+    .avatar-option.selected {
+      border-color: #4a148c;
+      background: #f3e5f5;
+      transform: scale(1.2);
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-section h2 {
+      color: #4a148c;
+      margin-bottom: 24px;
+      font-size: 22px;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #7b1fa2;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #b39ddb;
+      border-radius: 10px;
+      background: #f5f9ff;
+      color: #283593;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #4a148c;
+      box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
+    }
+
+    .form-group input:hover,
+    .form-group select:hover {
+      border-color: #7e57c2;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(120deg, #7b1fa2, #4a148c);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(123, 31, 162, 0.4);
+      background: linear-gradient(120deg, #6a1b9a, #3d0f72);
+    }
+
+    .link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #7b1fa2;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .link:hover {
+      color: #4a148c;
+      text-shadow: 0 0 5px rgba(123, 31, 162, 0.3);
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 900px) {
+      .register-container {
+        flex-direction: column;
+        max-width: 500px;
+      }
+      .preview-section {
+        border-right: none;
+        border-bottom: 2px dashed #90caf9;
+        padding: 20px;
+      }
+      .avatars-grid {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <!-- Vista previa del avatar -->
+    <div class="preview-section">
+      <div class="preview-frame">
+        <div class="preview-avatar" id="preview">🧑‍🎓</div>
+      </div>
+      <h3>¡Crea tu Personaje!</h3>
+      <p>Elige un avatar y comienza tu aventura escolar</p>
+      
+      <!-- Selección de avatares -->
+      <div class="avatars-grid" id="avatars">
+        <div class="avatar-option selected" data-avatar="🧑‍🎓">🧑‍🎓</div>
+        <div class="avatar-option" data-avatar="👩‍🔬">👩‍🔬</div>
+        <div class="avatar-option" data-avatar="👨‍💻">👨‍💻</div>
+        <div class="avatar-option" data-avatar="👧">👧</div>
+        <div class="avatar-option" data-avatar="👦">👦</div>
+        <div class="avatar-option" data-avatar="👩‍🚀">👩‍🚀</div>
+      </div>
+    </div>
+
+    <!-- Formulario de registro -->
+    <div class="form-section">
+      <h2>REGISTRO</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input 
+            type="text" 
+            id="nombre" 
+            name="nombre" 
+            required 
+            placeholder="Ej: Ana"
+          >
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input 
+            type="text" 
+            id="apellido" 
+            name="apellido" 
+            required 
+            placeholder="Ej: Gómez"
+          >
+        </div>
+        <div class="form-group">
+          <label for="documento">Documento</label>
+          <input 
+            type="text" 
+            id="documento" 
+            name="documento" 
+            required 
+            inputmode="numeric"
+            placeholder="Ej: 12345678"
+          >
+        </div>
+        <div class="form-group">
+          <label for="grado">Grado Escolar</label>
+          <select id="grado" name="grado" required>
+            <option value="">-- Selecciona --</option>
+            <option value="3">3° Grado</option>
+            <option value="4">4° Grado</option>
+            <option value="5">5° Grado</option>
+            <option value="6">6° Grado</option>
+            <option value="7">7° Grado</option>
+            <option value="8">8° Grado</option>
+            <option value="9">9° Grado</option>
+            <option value="10">10° Grado</option>
+            <option value="11">11° Grado</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">CREAR PERSONAJE</button>
+      </form>
+      <a href="login.html" class="link">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+  </div>
+
+  <script>
+    // Filtro de números en documento
+    document.getElementById('documento').addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    // Selección de avatar
+    const avatarOptions = document.querySelectorAll('.avatar-option');
+    const preview = document.getElementById('preview');
+
+    avatarOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        // Quitar selección anterior
+        avatarOptions.forEach(opt => opt.classList.remove('selected'));
+        // Aplicar selección
+        this.classList.add('selected');
+        // Actualizar vista previa
+        preview.textContent = this.dataset.avatar;
+      });
+    });
+
+    // Validación y envío
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const doc = document.getElementById('documento').value.trim();
+      const grado = document.getElementById('grado').value;
+      const avatar = preview.textContent;
+
+      if (!nombre || !apellido) {
+        alert('❗ Ingresa nombre y apellido.');
+        return;
+      }
+      if (!doc || isNaN(doc)) {
+        alert('❗ Ingresa un documento válido (solo números).');
+        return;
+      }
+      if (!grado) {
+        alert('❗ Selecciona tu grado escolar.');
+        return;
+      }
+
+      const usuario = nombre + ' ' + apellido;
+      alert(`🎮 ¡Personaje creado!\nNombre: ${usuario}\nGrado: ${grado}°\nAvatar: ${avatar}\nDocumento: ${doc}\n\n¡Bienvenido a Juegos en Clase!`);
+
+      // Más adelante: guardar en Firebase
+      // window.location.href = 'perfil.html';
+    });
+  </script>
+</body>
+</html>
